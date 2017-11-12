@@ -1,11 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<h1> My Posts: </h1>
-	<h2> Posts </h2>
-		<p> {{post_items}} </p>
-</body>
-</html>
+{% extends "base.html" %}
+	
+
+
+{% block body %}
+<div class="jumbotron">
+  <h1 class="display-3">These are my posts!</h1>
+	<a class="btn btn-primary btn-lg" href="#" role="button">Create</a>
+</div>
+	{% for item in post_items %}
+	<div class="card" style="width: 20rem;">
+		  <div class="card-body">
+	<ul>
+		<a href="{% url 'detail' post_id=item.id %}"><li> <h4 class="card-title">{{item.title}}</h4></li></a>{{item.created|timesince}}
+		<li>{{item.content}}</li>
+		<li>{{item.id}}</li>
+		<a hred="{% url 'detail' post_id=item.id %}" class="btn btn-info">Read More...</a>
+		<a href="{% url 'update' post_id=item.id %}"><button class="btn btn-primary">Update</button></a>
+		<a href="{% url 'delete' post_id=item.id %}"><button class="btn btn-danger">Delete</button></a>
+	</ul>
+		</div>
+	</div>
+	{% endfor %}
+
+
+{% endblock %}

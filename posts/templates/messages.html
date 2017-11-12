@@ -1,0 +1,10 @@
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% comment %}  ccv this for using messages in other html templates by using {% include "messages.html"%} & it should be inside the block.
+{% endcomment %}

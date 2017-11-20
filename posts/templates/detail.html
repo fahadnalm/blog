@@ -1,13 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<ol>
-		<li> {{item.title}} </li>
-		<li> {{item.content}} </li>
-		<li> {{item.id}} </li>
-	</ol>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load urlify %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        {% if item.img %}
+            <img src="{{item.img.url}}" height="200" width="200" alt="" class="img-responsive">
+        {% endif %}
+        <h1>{{item.title}} <small>{{item.timestamp}}</small></h1>
+        {{item.content| linebreaks}}
+
+
+		<h1>{{item.title}} <small>{{item.publish}}</small></h1>
+{{item.content| linebreaks}} <br>
+
+		Author: {{item.author.get_full_name}} <br>
+         <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+            Share on Facebook
+        </a>
+
+        <a href="https://twitter.com/home?status={{item.content|truncatechars:35|urlify}}%20{{request.build_absolute_uri}}">
+            Share on Twitter
+        </a>
+
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title={{item.title|urlify}}&summary={{item.content|truncatechars:35|urlify}}&source={{request.build_absolute_uri}}">
+        Share on Linkedin
+        </a>
+
+        <br>
+    {% include 'django_comments.html' %}
+
+    </div>
+</div>
+{% endblock body %}
+
+

@@ -9,3 +9,5 @@ class PostForm(forms.ModelForm):
 		widgets={
         'publish': forms.DateInput(attrs={"type":"date"}),
         }
+
+        

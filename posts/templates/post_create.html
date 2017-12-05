@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block body %}
+	<h1>Create</h1>
 	<form action="{% url 'create' %}" method="POST" enctype="multipart/form-data"> <!--  creating a form tag/ action: sends tha data in the form to the url/ methods: post cuz we sending it to the server.      -->
 		{% csrf_token %}
-		{{form.as_p}}
+		{{form|crispy}}
 	<input type="submit" value="Create"> <!-- using submit to send the input to the server -->
 	</form>
 {% endblock body %}

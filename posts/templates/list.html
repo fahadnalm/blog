@@ -7,12 +7,7 @@
   <h1 class="display-3">These are my posts!</h1>
 	<a class="btn btn-primary btn-lg" href="{% url 'create' %}" role="button">Create</a>
 </div>
-<div class="row">
-<form action="" method="GET">
-    <input type="text" name='q' placeholder="Search posts" value="{{request.GET.q}}">
-    <input type="submit" value="Search">
-</form>
-</div>
+
 	<div class="row">
 	{% for item in post_items %}
 	<div class="col-xs-12 col-sm-6 col-4">
@@ -25,16 +20,10 @@
 
         {% if item.draft %}<h3>Draft</h3>{% endif %}
         {% if item.publish > today %}<h3>Future Post</h3>{% endif %}
-        <p><a href="{{ item.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
-
-		  <div class="card-body">
-		<a href="{% url 'detail' post_slug=item.slug %}"> <h4 class="card-title">{{item.title}}</h4></a>{{item.created|timesince}}<br>
-		{{item.content}}<br>
-		{{item.slug}}<br>
-		<a hred="{% url 'detail' post_slug=item.slug %}" class="btn btn-info">Read More...</a>
-		<a href="{% url 'update' post_slug=item.slug %}"><button class="btn btn-primary">Update</button></a>
+        <a href="{{ item.get_absolute_url }}" class="btn btn-primary" role="button">View</a>
+        <a href="{% url 'update' post_slug=item.slug %}"><button class="btn btn-warning">Update</button></a>
 		<a href="{% url 'delete' post_slug=item.slug %}"><button class="btn btn-danger">Delete</button></a>
-		</div>
+		<br><br>
 	</div>
 	</div>
 	{% endfor %}

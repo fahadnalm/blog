@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% block title %}
+Login
+{% endblock title %}
+
+
+{% block body %}
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input class = "btn btn-success" type="submit" value="Login">
+        <a href="{% url 'github_login' %}" class="btn btn-dark"><i class="fa fa-github" aria-hidden="true"></i> login by Github</a>
+        <a href="{% url 'twitter_login' %}" class="btn btn-primary"><i class="fa fa-twitter" aria-hidden="true"></i> login by Twitter</a>
+    </form>
+{% endblock body %}

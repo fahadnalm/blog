@@ -51,3 +51,9 @@ def pre_save_post_reciever(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_post_reciever,sender=Post)
+
+
+class Like(models.Model):
+	user = models.ForeignKey(User)
+	post = models.ForeignKey(Post)
+	created = models.DateTimeField(auto_now_add=True)
